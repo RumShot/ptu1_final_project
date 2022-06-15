@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <p>{{ message }}</p>
+    <p>Total orders: {{ html_overall_orders }}</p><br>
+    <p>Distributors list:</p>
+    <ul>
+        {% for distributor in distributors %}
+        <li>{{ distributor }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

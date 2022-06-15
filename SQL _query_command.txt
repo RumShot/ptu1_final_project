@@ -1,0 +1,24 @@
+SELECT svst_order.order_id, svst_order_product.order_id, store_name, email, telephone, shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, comment, order_status_id, currency_code, date_added FROM svst_order
+LEFT JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id 
+
+SELECT * FROM svst_order INNER JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id INNER JOIN svst_product ON svst_order_product.product_id = svst_product.product_id
+
+SELECT * FROM svst_order INNER JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id INNER JOIN svst_product ON svst_order_product.product_id = svst_product.product_id WHERE svst_product.import_batch LIKE '%Elko%' 
+
+SELECT * FROM svst_order LEFT JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id LEFT JOIN svst_product ON svst_order_product.product_id = svst_product.product_id WHERE svst_product.import_batch LIKE '%Elko%' AND svst_order.order_status_id = 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
