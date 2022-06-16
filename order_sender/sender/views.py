@@ -2,6 +2,7 @@ from django.shortcuts import render
 import mariadb
 
 
+connection_data = ()
 def data_base(request):
     # conection to MariaDB
     try:
