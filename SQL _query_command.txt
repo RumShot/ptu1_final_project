@@ -7,7 +7,7 @@ SELECT * FROM svst_order INNER JOIN svst_order_product ON svst_order.order_id = 
 
 SELECT * FROM svst_order LEFT JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id LEFT JOIN svst_product ON svst_order_product.product_id = svst_product.product_id WHERE svst_product.import_batch LIKE '%Elko%' AND svst_order.order_status_id = 2
 
-
+UPDATE `svst_order` SET order_status_id = 2 WHERE order_id = 86; 
 
 
 

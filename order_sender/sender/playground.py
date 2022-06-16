@@ -1,9 +1,9 @@
 import mariadb
-import schedule
-import time
 import json
 from datetime import datetime
 import requests
+import logging
+
 
 today = datetime.now()
 date_now = today.strftime('%y%m%d_%H_%M')
@@ -21,7 +21,6 @@ def database_connection(sql_command):
         cursor.execute(sql_command)
         command_return = cursor.fetchall()
         conn.close()
-        message = "connected to database :)"
 
         return command_return
 
@@ -30,13 +29,14 @@ def database_connection(sql_command):
 
         return message
 
+# ------------ ELKO --------------------
 def elko_generate_order():
     sql_command = "SELECT * FROM svst_order INNER JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id INNER JOIN svst_product ON svst_order_product.product_id = svst_product.product_id WHERE svst_product.import_batch LIKE '%Elko%' AND svst_order.order_status_id = 2"
     data_received = database_connection(sql_command)
     if data_received != []:
         for sigle_data_received in data_received:
             order_id = str(sigle_data_received[0])
-            file_name = file_name = order_id+ '_ELKO_' + date_now + '.json'
+            file_name = order_id+ '_ELKO_' + date_now + '.json'
             elko_email = sigle_data_received[10]
             elko_telephone = sigle_data_received[11]
             elko_name = sigle_data_received[30]
@@ -101,9 +101,11 @@ def elko_generate_order():
                 }
             # save_json(distributor_message, file_name)
             # elko_post_request(distributor_message)
+            # elko_change_status(order_id)
     else:
         print("No data received")
 
+# JSON save 
 def save_json(distributor_message, file_name):
     with open('order_sender/sender/order_messages/' + file_name, 'w+', encoding="utf-8") as json_file:
         json.dump(distributor_message,json_file)   
@@ -118,9 +120,10 @@ def elko_post_request(distributor_message):
     response = requests.request("POST", url, headers=headers, data=payload)
     print(response.text)
 
-elko_generate_order()
+# changing order_status_id from Processing --> Shipping
+def elko_change_status(order_id):
+    sql_command = "UPDATE `svst_order` SET order_status_id = 3 WHERE order_id = " + order_id
+    database_connection(sql_command)
 
-# schedule.every(50).seconds.do(elko_generate_order)
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+
+elko_generate_order()

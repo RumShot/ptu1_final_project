@@ -1,1 +1,2 @@
-span.nav-link{background-color: green;}
+#navbarSupportedContent{display: flex; justify-content: space-between;}
+.nav-item span{border-radius: 5px; font-weight: bold; color: white}
