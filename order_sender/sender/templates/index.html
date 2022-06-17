@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container">
     <p>{{ message }}</p>
-    <p>Total orders: {{ html_overall_orders }}</p><br>
-    <p>Distributors list:</p>
-    <ul>
-        {% for distributor in distributors %}
-        <li>{{ distributor }}</li>
-        {% endfor %}
-    </ul>
+    <div class="main_cont">
+        <div class="counts">
+            <h4>Statistics:</h4>
+            <p>Processing count: {{ processing_count.0.0 }}</p>
+            <p>Shipped count: {{ shipped_count.0.0 }}</p>
+            <p>Completed count count: {{ completed_count.0.0 }}</p>
+            <p>Unprocessed count: {{ unprocessed_count.0.0 }}</p>
+            <p>Total orders: {{ overall_orders.0.0 }}</p>
+        </div>
+        <div class="distributors">
+            <h4>Distributors list:</h4>
+            <ul>
+                {% for distributor in distributors %}
+                <li>{{ distributor }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock content %}
