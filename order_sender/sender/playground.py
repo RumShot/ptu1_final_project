@@ -2,6 +2,7 @@ import mariadb
 import json
 from datetime import datetime
 import requests
+from authentications import acc_test_lc
 import logging
 
 
@@ -103,7 +104,7 @@ def elko_generate_order():
             # elko_post_request(distributor_message)
             # elko_change_status(order_id)
     else:
-        print("No data received")
+        print("Elko no data received")
 
 # JSON save 
 def save_json(distributor_message, file_name):
@@ -125,5 +126,58 @@ def elko_change_status(order_id):
     sql_command = "UPDATE `svst_order` SET order_status_id = 3 WHERE order_id = " + order_id
     database_connection(sql_command)
 
+# elko_generate_order()
 
-elko_generate_order()
+
+# ------------ ACC --------------------
+def acc_generate_order():
+    sql_command = "SELECT * FROM svst_order INNER JOIN svst_order_product ON svst_order.order_id = svst_order_product.order_id INNER JOIN svst_product ON svst_order_product.product_id = svst_product.product_id WHERE svst_product.import_batch LIKE '%ACC%' AND svst_order.order_status_id = 2"
+    data_received = database_connection(sql_command)
+    if data_received != []:
+        for sigle_data_received in data_received:
+            order_id = str(sigle_data_received[0])
+            file_name = order_id+ '_ACC_' + date_now + '.json'
+            acc_email = sigle_data_received[10]
+            acc_telephone = sigle_data_received[11]
+            acc_name = sigle_data_received[30]
+            acc_surname = sigle_data_received[31]
+            acc_shipping_country = sigle_data_received[36]
+            if acc_shipping_country != "Lithuania" or "lithuania" or "lietuva" or "Lietuva":
+                acc_to_other_country = "null"
+                acc_country_id = "lt"
+            acc_shipping_postcode = sigle_data_received[35]
+            acc_shipping_city = sigle_data_received[38]
+            acc_shipping_address = sigle_data_received[32]
+            acc_price = sigle_data_received[67]
+            acc_price_total = sigle_data_received[68]
+            acc_quantity = sigle_data_received[66]
+            acc_product_name = sigle_data_received[64]
+            acc_product_model = sigle_data_received[72]
+            acc_product_id = sigle_data_received[132]
+            acc_user_comment = sigle_data_received[44]
+            # TEST LICENCE
+            licence_key = acc_test_lc.licence
+            distributor_message = "{\r\n\"request\": {\r\n\"CompanyId\": \"_al\",\r\n\"LicenseKey\": \"" + str(licence_key) + "\",\r\n\"OrderInfo\": {\r\n\"DlvPointId\": \"305681192\",\r\n\"DlvChannel\": \"20\",\r\n\"DlvType\": \"1\",\r\n\"DlvFirstName\": \"" + acc_name + "\",\r\n\"DlvLastName\": \"" + acc_surname + "\",\r\n\"DlvCountryId\": \"" + acc_country_id + "\",\r\n\"DlvCity\": \"" + acc_shipping_city + "\",\r\n\"DlvStreet\": \"" + acc_shipping_address+ "\",\r\n\"DlvZipCode\": \"" + acc_shipping_postcode + "\",\r\n\"DlvEmail\": \"" + acc_email + "\",\r\n\"DlvPhone\": \"" + acc_telephone + "\",\r\n\"DlvCarrierNote\": \"" + acc_user_comment + "\",\r\n\"SplitDestination\": \"10\",\r\n\"SplitDelivery\": \"10\"\r\n},\r\n\"OrderLines\": [{\r\n\"ProductId\": \"320848\",\r\n\"Quantity\": 1\r\n}]\r\n}\r\n}"
+            save_json(distributor_message, file_name)
+            acc_post_request(distributor_message, order_id)
+            # acc_change_status(order_id, order_id)
+    else:
+        print("ACC no data received")
+
+def acc_post_request(distributor_message, order_id):
+    # TEST DISTRIBUTION !!!!!!!!!!!!
+    acc_url = "https://api-test.accdistribution.net//v1/Orders/Create"
+    headers = {
+    'Content-Type': 'application/json; charset=UTF-8'
+    }
+    response = requests.request("POST", acc_url, headers=headers, data=distributor_message.encode())
+    print(response.text)
+    file_name_resp = order_id+ '_ACC_' + date_now + 'response.json'
+    with open('order_sender/sender/order_messages/' + file_name_resp, 'w+', encoding="utf-8") as json_file:
+        json.dump(response.text, json_file)   
+
+def acc_change_status(order_id):
+    sql_command = "UPDATE `svst_order` SET order_status_id = 3 WHERE order_id = " + order_id
+    database_connection(sql_command)
+
+acc_generate_order()
