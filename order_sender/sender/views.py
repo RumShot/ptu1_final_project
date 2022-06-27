@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render 
 import mariadb
 from django.contrib import messages
+from os.path import join
+import os
 
 
 def data_base(request):
@@ -159,7 +161,7 @@ def hole_list(request):
         return render(request, 'index.html')
 
     if is_connected == 1:
-        cursor  = conn.cursor() 
+        cursor = conn.cursor() 
         cursor.execute("SELECT * FROM `svst_order` WHERE order_status_id NOT IN (2, 3, 5) ORDER BY date_added DESC")
         overall_processing = cursor.fetchall()
 
@@ -171,3 +173,24 @@ def hole_list(request):
         conn.close()
         return render(request, 'hole.html', context)
 
+def log_list(request):
+    try:
+        conn = mariadb.connect(
+            host="127.0.0.1",
+            port=3307,
+            user="root",
+            password="",
+            database="ptu1_data_base"
+            )
+        is_connected = 1
+    except mariadb.Error as e:
+        is_connected = 0
+        messages.error(request, f"Error connecting to the database: {e}")
+        return render(request, 'logs.html')
+
+    logs = 'sender/static/'
+    files = os.listdir(join(logs, 'logs'))
+    context = {'files': [join('logs/', file) for file in files],
+               'is_connected': int(is_connected), 
+                }
+    return render(request, 'logs.html', context)

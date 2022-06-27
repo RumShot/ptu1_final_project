@@ -21,6 +21,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'shipped' %}">Shipped</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'completed' %}">Completed</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'hole' %}">Hole</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logs' %}">Logs</a></li>
                     </ul>{% endblock navigation %}
                     <ul class="navbar-nav">
                         <li class="nav-item"><span class="nav-link">DB status: {% if is_connected == 1 %}<span style="padding: 5px; background-color: green;">ON</span>{% else %}<span style="padding: 5px; background-color: red;">OFF</span>{% endif %}</span></li>
@@ -36,7 +37,7 @@
                 {% for message in messages %}
                     <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
                 {% endfor %}
-            {% endif %}     
+            {% endif %}
             {% endblock messages %}
         </div>
         <br>

@@ -11,7 +11,7 @@ date_now = today.strftime('%y%m%d_%H_%M')
 
 log_date = today.strftime('%y%m')
 logger = logging.getLogger(__name__)
-logger_file = logging.FileHandler('order_sender/sender/logging/error' + log_date + '.log')
+logger_file = logging.FileHandler('order_sender/sender/static/logs/log_' + log_date + '.log')
 logger.addHandler(logger_file)
 logger.setLevel(logging.INFO)
 logger_formater = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(module)s:%(lineno)s:%(message)s')
@@ -33,13 +33,12 @@ def database_connection(sql_command):
         cursor.execute(sql_command)
         command_return = cursor.fetchall()
         conn.close()
-
         return command_return
 
     except mariadb.Error as e:
         logger.info(f"couldn't connect: {e}")
         message = f"Error connecting to the database: {e}"
-
+        print("yolo")
         return message
 
 # ------------ ELKO --------------------
@@ -113,7 +112,7 @@ def elko_generate_order():
                 "id": "" + elko_product_id + ""
                 }
             # save_json(distributor_message, file_name)
-            elko_post_request(distributor_message, order_id)
+            # elko_post_request(distributor_message, order_id)
             # elko_change_status(order_id)
     else:
         logger.info(f"Request have been made to ELKO. No data from SQL came back for order_status_id = 2")

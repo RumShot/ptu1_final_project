@@ -5,3 +5,4 @@ venv/
 **/__pycache__/
 **/authentications
 **/order_messages
+order_sender/static

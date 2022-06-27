@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <h1>LOGS</h1>
+    {% for file in files %}
+        <a href="{% static file %}">{{ file }}</a><br>
+    {% endfor %}
+</div>
+{% endblock content %}

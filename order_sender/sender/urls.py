@@ -8,4 +8,5 @@ urlpatterns = [
     path('shipped/', views.shipped_list, name='shipped'),
     path('completed/', views.completed_list, name='completed'),
     path('hole/', views.hole_list, name='hole'),
+    path('logs/', views.log_list, name='logs'),
     ]
