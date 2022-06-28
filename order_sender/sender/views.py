@@ -1,4 +1,4 @@
-from django.shortcuts import render 
+from django.shortcuts import render
 import mariadb
 from django.contrib import messages
 from os.path import join

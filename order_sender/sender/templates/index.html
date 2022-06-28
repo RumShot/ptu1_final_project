@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% load i18n %}
 <div class="container">
     <p>{{ message }}</p>
     <div class="main_cont">
         <div class="counts">
-            <h4>Statistics:</h4>
-            <p>Processing count: {{ processing_count.0.0 }}</p>
-            <p>Shipped count: {{ shipped_count.0.0 }}</p>
-            <p>Completed count count: {{ completed_count.0.0 }}</p>
-            <p>Unprocessed count: {{ unprocessed_count.0.0 }}</p>
-            <p>Total orders: {{ overall_orders.0.0 }}</p>
+            <h4>{% trans 'Statistics' %}:</h4>
+            <p>{% trans 'Processing count' %}: {{ processing_count.0.0 }}</p>
+            <p>{% trans 'Shipped count' %}: {{ shipped_count.0.0 }}</p>
+            <p>{% trans 'Completed count' %}: {{ completed_count.0.0 }}</p>
+            <p>{% trans 'Unprocessed count' %}: {{ unprocessed_count.0.0 }}</p>
+            <p>{% trans 'Total orders' %}: {{ overall_orders.0.0 }}</p>
         </div>
         <div class="distributors">
-            <h4>Distributors list:</h4>
+            <h4>{% trans 'Distributors list' %}: </h4>
             <ul>
                 {% for distributor in distributors %}
                 <li>{{ distributor }}</li>

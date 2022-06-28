@@ -38,7 +38,6 @@ def database_connection(sql_command):
     except mariadb.Error as e:
         logger.info(f"couldn't connect: {e}")
         message = f"Error connecting to the database: {e}"
-        print("yolo")
         return message
 
 # ------------ ELKO --------------------
