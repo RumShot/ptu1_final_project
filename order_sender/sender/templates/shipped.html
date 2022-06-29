@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load i18n %}
 <div class="container">
     <ul>
-        {% for element in overall_processing %}
+        {% for element in overall_shipped %}
             <li id="ZIP{{ element.0 }}" onClick="reply_click(this.id)" class="list-group-item list-group-item-action list-group-item-dark">ID: {{ element.0 }} <strong>{{ element.29 }} {{ element.30 }} </strong>{{ element.10 }}
                 {{ element.11 }} {{ element.17 }} {{ element.38 }} 
                 {% if element.44 == '' %}<i class="fa fa-comment-o"></i>{% else %}<i id="comment" class="fa fa-comment"></i><div class="hide">{{ element.44 }}</div>{% endif %}
@@ -11,7 +12,5 @@
         {% endfor %}
     </ul>
 </div>
-<script>
-
-</script>
 {% endblock content %}
+{% block title %} {{ block.super }} | {% trans 'Shipped' %}{% endblock title%}

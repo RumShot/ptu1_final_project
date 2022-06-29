@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-28 12:06+0300\n"
+"POT-Creation-Date: 2022-06-28 21:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,27 +24,29 @@ msgstr ""
 msgid "Distributors"
 msgstr "Distributoriai"
 
-#: .\sender\templates\base.html:19 .\sender\templates\index.html:8
+#: .\sender\templates\base.html:19 .\sender\templates\index.html:7
+#: .\sender\templates\index.html:25
 msgid "Statistics"
 msgstr "Statistika"
 
-#: .\sender\templates\base.html:20
+#: .\sender\templates\base.html:20 .\sender\templates\processing.html:17
 msgid "Processing"
-msgstr "Apdorojimi"
+msgstr "Apdorojami"
 
-#: .\sender\templates\base.html:21
+#: .\sender\templates\base.html:21 .\sender\templates\shipped.html:15
 msgid "Shipped"
-msgstr "Išsiųsta"
+msgstr "Išsiūsti"
 
-#: .\sender\templates\base.html:22
+#: .\sender\templates\base.html:22 .\sender\templates\completed.html:15
 msgid "Completed"
-msgstr "Atlikta"
+msgstr "Atlikti"
 
-#: .\sender\templates\base.html:23
+#: .\sender\templates\base.html:23 .\sender\templates\hole.html:15
 msgid "Hole"
 msgstr "Neaiškūs"
 
 #: .\sender\templates\base.html:24 .\sender\templates\logs.html:5
+#: .\sender\templates\logs.html:11
 msgid "Logs"
 msgstr "Log'ai"
 
@@ -52,26 +54,50 @@ msgstr "Log'ai"
 msgid "DB status:"
 msgstr "DB statusas:"
 
-#: .\sender\templates\index.html:9
+#: .\sender\templates\includes\processing_paginator.html:5
+msgid "first"
+msgstr "pirmyn"
+
+#: .\sender\templates\includes\processing_paginator.html:6
+msgid "back"
+msgstr "atgal"
+
+#: .\sender\templates\includes\processing_paginator.html:9
+msgid "page"
+msgstr "lapas"
+
+#: .\sender\templates\includes\processing_paginator.html:9
+msgid "of"
+msgstr "iš"
+
+#: .\sender\templates\includes\processing_paginator.html:11
+msgid "next"
+msgstr "toliau"
+
+#: .\sender\templates\includes\processing_paginator.html:12
+msgid "previous"
+msgstr "atgal"
+
+#: .\sender\templates\index.html:8
 msgid "Processing count"
-msgstr "Apdorojimu kiekis"
+msgstr "Apdorojamu kiekis"
+
+#: .\sender\templates\index.html:9
+msgid "Shipped count"
+msgstr "Išsiūstu kiekis"
 
 #: .\sender\templates\index.html:10
-msgid "Shipped count"
-msgstr "Išsiųstu kiekis"
+msgid "Completed count"
+msgstr "Atliktu kiekis"
 
 #: .\sender\templates\index.html:11
-msgid "Completed count"
-msgstr "Atliktu skaičius"
-
-#: .\sender\templates\index.html:12
 msgid "Unprocessed count"
 msgstr "Neaiškiu kiekis"
 
-#: .\sender\templates\index.html:13
+#: .\sender\templates\index.html:12
 msgid "Total orders"
 msgstr "Viso užsakymu"
 
-#: .\sender\templates\index.html:16
+#: .\sender\templates\index.html:15
 msgid "Distributors list"
 msgstr "Distributoriu sąrašas"

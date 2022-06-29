@@ -2,9 +2,8 @@
 {% block content %}
 {% load i18n %}
 <div class="container">
-    <p>{{ message }}</p>
     <div class="main_cont">
-        <div class="counts">
+        <div class="counts col col-lg-3">
             <h4>{% trans 'Statistics' %}:</h4>
             <p>{% trans 'Processing count' %}: {{ processing_count.0.0 }}</p>
             <p>{% trans 'Shipped count' %}: {{ shipped_count.0.0 }}</p>
@@ -23,3 +22,4 @@
     </div>
 </div>
 {% endblock content %}
+{% block title %} {{ block.super }} | {% trans 'Statistics' %}{% endblock title%}

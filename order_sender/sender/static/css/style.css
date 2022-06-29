@@ -1,7 +1,7 @@
 #navbarSupportedContent{display: flex; justify-content: space-between;}
 .nav-item span{border-radius: 5px; font-weight: bold; color: white}
 .main_cont{display: flex;}
-.counts{margin: 0 20px 0 20px;}
+.counts{margin: 0 20px 0 20px; padding: 0 20px 0 20px}
 .distributors{margin: 0 20px 0 20px;}
 .hide {display: none;}
 #comment:hover + .hide {display: block; position: absolute; width: 20rem; z-index: 1; left: 50%; background-color: rgb(180, 168, 185);  border-style: solid; border-width: 1px; border-color: black; border-radius: 6px; padding: 10px;}
