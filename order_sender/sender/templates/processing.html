@@ -2,9 +2,9 @@
 {% block content %}
 {% load i18n %}
 <div class="container">
-    {{ page }}
+    {% include 'includes/processing_paginator.html'%}
     <ul>
-        {% for element in overall_processing %}
+        {% for element in paginated_processing %}
             <li id="ZIP{{ element.0 }}" onClick="reply_click(this.id)" class="list-group-item list-group-item-action list-group-item-dark">ID: {{ element.0 }} <strong>{{ element.29 }} {{ element.30 }} </strong>{{ element.10 }}
                 {{ element.11 }} {{ element.17 }} {{ element.38 }}
                 {% if element.44 == '' %}<i class="fa fa-comment-o"></i>{% else %}<i id="comment" class="fa fa-comment"></i><div class="hide">{{ element.44 }}</div>{% endif %}
@@ -12,7 +12,6 @@
             <li id="{{ element.0 }}" style="display:none;" class="list-group-item list-group-item-action list-group-item-info">{{ element }}</li>
         {% endfor %}
     </ul>
-    {% include 'includes/processing_paginator.html'%}
 </div>
 {% endblock content %}
 {% block title %} {{ block.super }} | {% trans 'Processing' %}{% endblock title%}

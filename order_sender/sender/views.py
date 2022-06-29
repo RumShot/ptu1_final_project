@@ -23,10 +23,10 @@ def database_connection(sql_command):
         return command_return, is_connected
 
     except mariadb.Error as e:
-        is_connected = 0
         messages = f"Error connecting to the database: {e}"
+        sql_command = None
+        return sql_command
 
-        return messages, is_connected
 
 def data_base(request):
     sql_command = "SELECT COUNT(order_id) FROM svst_order"
@@ -34,12 +34,14 @@ def data_base(request):
 
     sql_command = "SELECT DISTINCT import_batch FROM svst_product"
     distributors = database_connection(sql_command)
-    inner_dist = distributors[0]
-    distrubutor_list = []
 
-    for distributor in inner_dist:
-        fixed_dist = distributor[0].replace('LT', '').replace('LV', '').split()[0]
-        distrubutor_list.append(fixed_dist) if fixed_dist.split()[0] not in distrubutor_list else distrubutor_list
+    if distributors != None:
+        inner_dist = distributors[0]
+        distrubutor_list = []
+
+        for distributor in inner_dist:
+            fixed_dist = distributor[0].replace('LT', '').replace('LV', '').split()[0]
+            distrubutor_list.append(fixed_dist) if fixed_dist.split()[0] not in distrubutor_list else distrubutor_list
 
     sql_command = "SELECT COUNT(order_status_id) FROM svst_order WHERE order_status_id = 2"
     processing_count = database_connection(sql_command)
@@ -53,14 +55,19 @@ def data_base(request):
     sql_command = "SELECT COUNT(order_status_id) FROM svst_order WHERE order_status_id NOT IN (2, 3, 5)"
     unprocessed_count = database_connection(sql_command)
 
-    context = {
-        'overall_orders': overall_orders[0],
-        'distributors': distrubutor_list,
-        'processing_count': processing_count[0],
-        'shipped_count': shipped_count[0],
-        'completed_count': completed_count[0],
-        'unprocessed_count': unprocessed_count[0],
-        }
+    if overall_orders != None:
+        is_connected = 1 
+        context = {
+            'is_connected': is_connected,
+            'overall_orders': overall_orders[0],
+            'distributors': distrubutor_list,
+            'processing_count': processing_count[0],
+            'shipped_count': shipped_count[0],
+            'completed_count': completed_count[0],
+            'unprocessed_count': unprocessed_count[0],
+            }
+    else:
+        context = None
 
     return render(request, 'index.html', context)
 
@@ -69,14 +76,18 @@ def processing_list(request):
     sql_command = "SELECT * FROM `svst_order` WHERE order_status_id = 2 ORDER BY date_added DESC"
     overall_processing = database_connection(sql_command)
 
-    paginator = Paginator(overall_processing[0], 3)
-    page_number = request.GET.get('page')
-    page = paginator.get_page(page_number)
+    if overall_processing != None:
+        paginator = Paginator(overall_processing[0], 6)
+        page_number = request.GET.get('page')
+        paginated_processing = paginator.get_page(page_number)
+        is_connected = 1
 
-    context = {
-        'overall_processing': overall_processing[0],
-        'page': page,
-        }
+        context = {
+            'paginated_processing': paginated_processing,
+            'is_connected': is_connected,
+            }
+    else:
+        context = None
 
     return render(request, 'processing.html', context)
 
@@ -85,9 +96,14 @@ def shipped_list(request):
     sql_command = "SELECT * FROM `svst_order` WHERE order_status_id = 3 ORDER BY date_added DESC"
     overall_shipped = database_connection(sql_command)
 
-    context = {
-        'overall_shipped': overall_shipped[0],
-        }
+    if overall_shipped != None:
+        is_connected = 1
+        context = {
+            'overall_shipped': overall_shipped[0],
+            'is_connected': is_connected,
+            }
+    else:
+        context = None
 
     return render(request, 'shipped.html', context)
 
@@ -96,9 +112,14 @@ def completed_list(request):
     sql_command = "SELECT * FROM `svst_order` WHERE order_status_id = 5 ORDER BY date_added DESC"
     overall_complete = database_connection(sql_command)
 
-    context = {
-        'overall_complete': overall_complete[0],
-        }
+    if overall_complete != None:
+        is_connected = 1
+        context = {
+            'overall_complete': overall_complete[0],
+            'is_connected': is_connected,
+            }
+    else:
+        context = None
 
     return render(request, 'completed.html', context)
 
@@ -107,19 +128,34 @@ def hole_list(request):
     sql_command = "SELECT * FROM `svst_order` WHERE order_status_id NOT IN (2, 3, 5) ORDER BY date_added DESC"
     overall_hole = database_connection(sql_command)
 
-    context = {
-        'overall_hole': overall_hole[0],
-        }
+    if overall_hole != None:
+        is_connected = 1
+        context = {
+            'overall_hole': overall_hole[0],
+            'is_connected': is_connected,
+            }
+    else:
+        context = None
 
     return render(request, 'hole.html', context)
 
 
 def log_list(request):
+    sql_command = "SELECT * FROM `svst_order_status`"
+    log_list = database_connection(sql_command)
+
     logs = 'sender/static/'
     files = os.listdir(join(logs, 'logs'))
 
-    context = {
-        'files': [join('logs/', file) for file in files],
-        }
+    if log_list != None:
+        is_connected = 1
+        context = {
+            'files': [join('logs/', file) for file in files],
+            'is_connected': is_connected,
+            }
+    else:
+        context = {
+            'files': [join('logs/', file) for file in files],
+            }
 
     return render(request, 'logs.html', context)
