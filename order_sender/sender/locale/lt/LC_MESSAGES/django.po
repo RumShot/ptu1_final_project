@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-28 21:03+0300\n"
+"POT-Creation-Date: 2022-06-29 13:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,59 +24,77 @@ msgstr ""
 msgid "Distributors"
 msgstr "Distributoriai"
 
-#: .\sender\templates\base.html:19 .\sender\templates\index.html:7
+#: .\sender\templates\base.html:20 .\sender\templates\index.html:7
 #: .\sender\templates\index.html:25
 msgid "Statistics"
 msgstr "Statistika"
 
-#: .\sender\templates\base.html:20 .\sender\templates\processing.html:17
+#: .\sender\templates\base.html:21 .\sender\templates\processing.html:17
 msgid "Processing"
 msgstr "Apdorojami"
 
-#: .\sender\templates\base.html:21 .\sender\templates\shipped.html:15
+#: .\sender\templates\base.html:22 .\sender\templates\shipped.html:17
 msgid "Shipped"
 msgstr "Išsiūsti"
 
-#: .\sender\templates\base.html:22 .\sender\templates\completed.html:15
+#: .\sender\templates\base.html:23 .\sender\templates\completed.html:17
 msgid "Completed"
 msgstr "Atlikti"
 
-#: .\sender\templates\base.html:23 .\sender\templates\hole.html:15
+#: .\sender\templates\base.html:24 .\sender\templates\hole.html:17
 msgid "Hole"
 msgstr "Neaiškūs"
 
-#: .\sender\templates\base.html:24 .\sender\templates\logs.html:5
+#: .\sender\templates\base.html:25 .\sender\templates\logs.html:5
 #: .\sender\templates\logs.html:11
 msgid "Logs"
 msgstr "Log'ai"
 
-#: .\sender\templates\base.html:27
+#: .\sender\templates\base.html:28
 msgid "DB status:"
 msgstr "DB statusas:"
 
+#: .\sender\templates\includes\completed_paginator.html:5
+#: .\sender\templates\includes\hole_paginator.html:5
 #: .\sender\templates\includes\processing_paginator.html:5
+#: .\sender\templates\includes\shipping_paginator.html:5
 msgid "first"
-msgstr "pirmyn"
+msgstr "pirmas"
 
+#: .\sender\templates\includes\completed_paginator.html:6
+#: .\sender\templates\includes\hole_paginator.html:6
 #: .\sender\templates\includes\processing_paginator.html:6
+#: .\sender\templates\includes\shipping_paginator.html:6
 msgid "back"
 msgstr "atgal"
 
-#: .\sender\templates\includes\processing_paginator.html:9
+#: .\sender\templates\includes\completed_paginator.html:10
+#: .\sender\templates\includes\hole_paginator.html:10
+#: .\sender\templates\includes\processing_paginator.html:10
+#: .\sender\templates\includes\shipping_paginator.html:10
 msgid "page"
 msgstr "lapas"
 
-#: .\sender\templates\includes\processing_paginator.html:9
+#: .\sender\templates\includes\completed_paginator.html:10
+#: .\sender\templates\includes\hole_paginator.html:10
+#: .\sender\templates\includes\processing_paginator.html:10
+#: .\sender\templates\includes\shipping_paginator.html:10
 msgid "of"
 msgstr "iš"
 
-#: .\sender\templates\includes\processing_paginator.html:11
+#: .\sender\templates\includes\completed_paginator.html:14
+#: .\sender\templates\includes\hole_paginator.html:14
+#: .\sender\templates\includes\processing_paginator.html:14
+#: .\sender\templates\includes\shipping_paginator.html:14
 msgid "next"
 msgstr "toliau"
 
-#: .\sender\templates\includes\processing_paginator.html:12
-msgid "previous"
-msgstr "atgal"
+#: .\sender\templates\includes\completed_paginator.html:15
+#: .\sender\templates\includes\hole_paginator.html:15
+#: .\sender\templates\includes\processing_paginator.html:15
+#: .\sender\templates\includes\shipping_paginator.html:15
+msgid "last"
+msgstr "paskutinis"
 
 #: .\sender\templates\index.html:8
 msgid "Processing count"
@@ -101,3 +119,6 @@ msgstr "Viso užsakymu"
 #: .\sender\templates\index.html:15
 msgid "Distributors list"
 msgstr "Distributoriu sąrašas"
+
+#~ msgid "previous"
+#~ msgstr "atgal"

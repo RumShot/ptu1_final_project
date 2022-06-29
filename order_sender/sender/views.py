@@ -97,9 +97,15 @@ def shipped_list(request):
     overall_shipped = database_connection(sql_command)
 
     if overall_shipped != None:
+
+        paginator = Paginator(overall_shipped[0], 2)
+        page_number = request.GET.get('page')
+        paginated_shipping = paginator.get_page(page_number)
+        is_connected = 1
+
         is_connected = 1
         context = {
-            'overall_shipped': overall_shipped[0],
+            'paginated_shipping': paginated_shipping,
             'is_connected': is_connected,
             }
     else:
@@ -113,9 +119,13 @@ def completed_list(request):
     overall_complete = database_connection(sql_command)
 
     if overall_complete != None:
+        paginator = Paginator(overall_complete[0], 6)
+        page_number = request.GET.get('page')
+        paginated_complete = paginator.get_page(page_number)
         is_connected = 1
+
         context = {
-            'overall_complete': overall_complete[0],
+            'paginated_complete': paginated_complete,
             'is_connected': is_connected,
             }
     else:
@@ -129,9 +139,13 @@ def hole_list(request):
     overall_hole = database_connection(sql_command)
 
     if overall_hole != None:
+        paginator = Paginator(overall_hole[0], 6)
+        page_number = request.GET.get('page')
+        paginated_hole = paginator.get_page(page_number)
         is_connected = 1
+
         context = {
-            'overall_hole': overall_hole[0],
+            'paginated_hole': paginated_hole,
             'is_connected': is_connected,
             }
     else:

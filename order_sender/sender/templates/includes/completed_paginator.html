@@ -1,0 +1,18 @@
+{% load i18n %}
+<div class="pagination">
+    <span class="step-links">
+        {% if paginated_complete.has_previous %}
+            <a href="?page=1">&#8656;{% trans 'first' %}</a>
+            <a href="?page={{ paginated_complete.previous_page_number }}">{% trans 'back' %}</a>
+        {% endif %}
+        {% if paginated_complete != None %}
+        <span class="current">
+            {% trans 'page' %} {{ paginated_complete.number }} {% trans 'of' %} {{ paginated_complete.paginator.num_pages }}
+        </span>
+        {% endif %}    
+            {% if paginated_complete.has_next %}
+            <a href="?page={{ paginated_complete.next_page_number }}">{% trans 'next' %}</a>
+            <a href="?page={{ paginated_complete.paginator.num_pages }}">{% trans 'last' %} &#8658;</a>
+        {% endif %}
+    </span>
+</div>

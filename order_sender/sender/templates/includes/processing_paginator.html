@@ -2,7 +2,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if paginated_processing.has_previous %}
-            <a href="?page=1">{% trans 'first' %}</a>
+            <a href="?page=1">&#8656;{% trans 'first' %}</a>
             <a href="?page={{ paginated_processing.previous_page_number }}">{% trans 'back' %}</a>
         {% endif %}
         {% if paginated_processing != None %}
@@ -12,7 +12,7 @@
         {% endif %}    
             {% if paginated_processing.has_next %}
             <a href="?page={{ paginated_processing.next_page_number }}">{% trans 'next' %}</a>
-            <a href="?page={{ paginated_processing.paginator.num_pages }}">{% trans 'previous' %} &raquo;</a>
+            <a href="?page={{ paginated_processing.paginator.num_pages }}">{% trans 'last' %} &#8658;</a>
         {% endif %}
     </span>
 </div>
